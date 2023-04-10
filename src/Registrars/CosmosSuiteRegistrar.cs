@@ -14,7 +14,7 @@ public static class CosmosSuiteRegistrar
     /// (This is probably the one you want)
     /// </summary>
     /// <param name="services"></param>
-    public static void AddCosmosSuite(IServiceCollection services)
+    public static void AddCosmosSuite(this IServiceCollection services)
     {
         services.AddCosmosContainerUtil();
         services.AddCosmosDatabaseUtil();
