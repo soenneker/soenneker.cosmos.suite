@@ -39,7 +39,7 @@
 
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 
-        <PackageReference Include="Soenneker.Cosmos.Container" Version="1.0.260" />
+        <PackageReference Include="Soenneker.Cosmos.Container" Version="1.0.264" />
 
         <PackageReference Include="Soenneker.Cosmos.Database" Version="1.0.207" />
     </ItemGroup>
