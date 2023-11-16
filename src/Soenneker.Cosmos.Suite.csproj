@@ -37,10 +37,10 @@
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
 
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 
-        <PackageReference Include="Soenneker.Cosmos.Container" Version="2.0.321" />
+        <PackageReference Include="Soenneker.Cosmos.Container" Version="2.0.325" />
 
-        <PackageReference Include="Soenneker.Cosmos.Database" Version="2.0.245" />
+        <PackageReference Include="Soenneker.Cosmos.Database" Version="2.0.247" />
     </ItemGroup>
 </Project>
