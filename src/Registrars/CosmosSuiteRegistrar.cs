@@ -10,13 +10,12 @@ namespace Soenneker.Cosmos.Suite.Registrars;
 public static class CosmosSuiteRegistrar
 {
     /// <summary>
-    /// Adds all of the Azure Cosmos utilities needed for use <para/>
-    /// (This is probably the one you want)
+    /// Adds all the Azure Cosmos utilities needed for use <para/>
     /// </summary>
     /// <param name="services"></param>
     public static void AddCosmosSuite(this IServiceCollection services)
     {
-        services.AddCosmosContainerUtil();
-        services.AddCosmosDatabaseUtil();
+        services.AddCosmosContainerUtilAsSingleton();
+        services.AddCosmosDatabaseUtilAsSingleton();
     }
 }
