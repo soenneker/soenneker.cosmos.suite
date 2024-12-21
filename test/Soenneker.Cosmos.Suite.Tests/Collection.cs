@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Soenneker.Cosmos.Repository.Tests;
+namespace Soenneker.Cosmos.Suite.Tests;
 
 /// <summary>
 /// This class has no code, and is never created. Its purpose is simply

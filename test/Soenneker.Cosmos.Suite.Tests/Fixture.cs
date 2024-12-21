@@ -3,8 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Soenneker.Fixtures.Unit;
 using Soenneker.Utils.Test;
+using Soenneker.Cosmos.Suite.Registrars;
 
-namespace Soenneker.Cosmos.Repository.Tests;
+namespace Soenneker.Cosmos.Suite.Tests;
 
 public class Fixture : UnitFixture
 {
@@ -24,5 +25,7 @@ public class Fixture : UnitFixture
 
         IConfiguration config = TestUtil.BuildConfig();
         services.AddSingleton(config);
+
+        services.AddCosmosSuiteAsSingleton();
     }
 }
