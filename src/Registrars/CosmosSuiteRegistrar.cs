@@ -15,8 +15,7 @@ public static class CosmosSuiteRegistrar
     /// <param name="services"></param>
     public static IServiceCollection AddCosmosSuiteAsSingleton(this IServiceCollection services)
     {
-        services.AddCosmosContainerUtilAsSingleton();
-        services.AddCosmosDatabaseUtilAsSingleton();
+        services.AddCosmosContainerUtilAsSingleton().AddCosmosDatabaseUtilAsSingleton();
 
         return services;
     }
