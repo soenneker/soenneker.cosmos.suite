@@ -39,6 +39,6 @@
 
         
 
-        <PackageReference Include="Soenneker.Cosmos.Container" Version="3.0.2178" />
+        <PackageReference Include="Soenneker.Cosmos.Container" Version="3.0.2179" />
     </ItemGroup>
 </Project>
