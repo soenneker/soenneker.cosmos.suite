@@ -12,7 +12,8 @@ public static class CosmosSuiteRegistrar
     /// <summary>
     /// Adds all the Azure Cosmos utilities needed for use <para/>
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddCosmosSuiteAsSingleton(this IServiceCollection services)
     {
         services.AddCosmosContainerUtilAsSingleton().AddCosmosDatabaseUtilAsSingleton();
