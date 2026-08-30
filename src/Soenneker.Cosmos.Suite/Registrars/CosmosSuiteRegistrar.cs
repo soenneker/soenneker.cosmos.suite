@@ -5,12 +5,12 @@ using Soenneker.Cosmos.Database.Registrars;
 namespace Soenneker.Cosmos.Suite.Registrars;
 
 /// <summary>
-/// A concoction of Azure Cosmos utilities and libraries <para/>
+/// Registers the Soenneker Azure Cosmos DB client, database, container, and setup utilities.
 /// </summary>
 public static class CosmosSuiteRegistrar
 {
     /// <summary>
-    /// Adds all the Azure Cosmos utilities needed for use <para/>
+    /// Adds the Cosmos database and container utilities with singleton lifetimes, including their transitive dependencies.
     /// </summary>
     /// <param name="services">Service collection that receives the registration.</param>
     /// <returns>The same service collection, so additional registrations can be chained.</returns>

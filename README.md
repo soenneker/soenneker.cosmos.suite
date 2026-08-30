@@ -5,32 +5,63 @@
 
 # Soenneker.Cosmos.Suite
 
-A concoction of Azure Cosmos utilities and libraries.
+One registration method for the Soenneker Azure Cosmos DB client, database, container, and setup utilities.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Soenneker.Cosmos.Suite
 ```
 
-## Quick start
+## Configuration
 
-```csharp
-using Soenneker.Cosmos.Suite.Registrars;
-using Microsoft.Extensions.DependencyInjection;
-
-var services = new ServiceCollection();
-var result = services.AddCosmosSuiteAsSingleton();
+```json
+{
+  "Environment": "Production",
+  "Azure": {
+    "Cosmos": {
+      "Endpoint": "https://your-account.documents.azure.com:443/",
+      "AccountKey": "your-account-key",
+      "DatabaseName": "app",
+      "ConnectionMode": "Direct",
+      "AllowBulkExecution": false,
+      "EnsureDatabaseOnFirstUse": true,
+      "EnsureContainerOnFirstUse": true,
+      "DatabaseThroughput": 1000,
+      "DatabaseThroughputType": "autoscale",
+      "ReplaceDatabaseThroughput": false
+    }
+  }
+}
 ```
 
-Adds all the Azure Cosmos utilities needed for use.
+`Environment`, `Endpoint`, `AccountKey`, and `DatabaseName` are required. `ConnectionMode` defaults to `Direct` and accepts `Direct` or `Gateway` case-insensitively.
 
-## What you get
+Database and container creation both default to enabled on first use. When database creation is enabled, `DatabaseThroughput` and `DatabaseThroughputType` are required by the setup utility. Set the ensure flags to `false` when the application must only use resources provisioned elsewhere.
 
-- `CosmosSuiteRegistrar` — A concoction of Azure Cosmos utilities and libraries.
+## Registration and use
 
-## API at a glance
+```csharp
+using Soenneker.Cosmos.Container.Abstract;
+using Soenneker.Cosmos.Database.Abstract;
+using Soenneker.Cosmos.Suite.Registrars;
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `CosmosSuiteRegistrar.AddCosmosSuiteAsSingleton(services)` | Adds all the Azure Cosmos utilities needed for use. | The same service collection, so additional registrations can be chained. |
+services.AddCosmosSuiteAsSingleton();
+
+ICosmosDatabaseUtil databases =
+    serviceProvider.GetRequiredService<ICosmosDatabaseUtil>();
+ICosmosContainerUtil containers =
+    serviceProvider.GetRequiredService<ICosmosContainerUtil>();
+
+Microsoft.Azure.Cosmos.Database database =
+    await databases.Get(cancellationToken);
+
+Microsoft.Azure.Cosmos.Container orders =
+    await containers.Get("orders", cancellationToken);
+```
+
+`AddCosmosSuiteAsSingleton()` registers `ICosmosDatabaseUtil` and `ICosmosContainerUtil` as singletons. Their setup, client, serializer, HTTP-cache, and memory-stream dependencies are added transitively. Registrations use `TryAdd`, so application registrations made before the suite are preserved.
+
+The suite does not add the higher-level repository abstractions and does not create resources during service registration. Resource creation, connection failures, and cancellation occur when a utility is first used and propagate to the caller.
+
+`AllowInsecureServerCertificate` is intentionally omitted above. If enabled, the client accepts it only when `Environment` is `Local` or `Test`; never use it for deployed environments.
